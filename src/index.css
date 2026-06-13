@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #E0F2FE; }
+  ::-webkit-scrollbar-thumb { background: #38BDF8; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #F97316; }
+  body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    background: #F8FAFC;
+    color: #1E293B;
+  }
+}
+
+@layer utilities {
+  .skeleton-shimmer {
+    background: linear-gradient(90deg,
+      rgba(56,189,248,.10) 25%,
+      rgba(56,189,248,.20) 50%,
+      rgba(56,189,248,.10) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Soft warm/cool gradient backgrounds for sections */
+  .bg-sky-soft   { background: linear-gradient(180deg, #FFFFFF 0%, #E0F2FE 100%); }
+  .bg-sky-soft-2 { background: linear-gradient(180deg, #E0F2FE 0%, #FFFFFF 100%); }
+  .bg-sun-soft   { background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%); }
+
+  .text-shadow-soft { text-shadow: 0 2px 18px rgba(12,74,110,.25); }
+
+  .card-hover {
+    transition: transform .3s, box-shadow .3s, border-color .3s;
+  }
+  .card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 24px 50px rgba(12,74,110,.18);
+    border-color: rgba(56,189,248,.55) !important;
+  }
+
+  .btn-wa {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: #fff;
+    transition: opacity .2s, transform .2s;
+  }
+  .btn-wa:hover { opacity: .92; transform: translateY(-1px); }
+
+  .btn-call {
+    background: #FFFFFF;
+    border: 1px solid rgba(12,74,110,.18);
+    color: #0C4A6E;
+    transition: border-color .2s, background .2s, transform .2s;
+  }
+  .btn-call:hover {
+    border-color: #38BDF8;
+    background: #E0F2FE;
+    transform: translateY(-1px);
+  }
+}
