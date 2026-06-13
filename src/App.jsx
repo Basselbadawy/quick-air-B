@@ -356,18 +356,18 @@ function Hero({ loading, onBook }) {
         ) : (
           <>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-sunset/30 text-[12px] font-bold text-sunset shadow-sm mb-6">
-              <Sun size={13}/> إجازتك السنة دي عندنا
+              <Sun size={13}/> رحلتك المثالية تبدأ هنا
             </div>
             <h1 className="text-5xl md:text-7xl font-black text-ocean leading-tight mb-4 text-shadow-soft">
               مع <span className="bg-gradient-to-r from-sky2 via-ocean-soft to-sky2 bg-clip-text text-transparent">كويك اير</span>
             </h1>
             <p className="text-lg md:text-xl text-slate-700 mb-10 leading-relaxed max-w-2xl mx-auto font-semibold">
-              وفر وقتك وفلوسك. بنوفرلك أحسن أماكن الإقامة ومواصلات مكيفة<br/>
-              <span className="text-ocean font-black">من الزقازيق لـ (مطروح، شرم الشيخ، الغردقة). كلمنا وهنظبطلك أحسن ديل.</span>
+              اكتشف أجمل رحلات مصر بأحسن الأسعار<br/>
+              <span className="text-ocean font-black">شرم الشيخ • الغردقة • دهب • مرسى مطروح.</span>
             </p>
             <div className="flex flex-wrap gap-3 justify-center mb-10">
               <a href="#daytrips" className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/90 backdrop-blur-sm border border-sky-200 text-ocean font-bold shadow-md hover:bg-white hover:border-sky2 hover:shadow-xl transition-all hover:-translate-y-0.5">
-                <Bus size={16}/> رحلات اليوم
+                <Bus size={16}/>  رحلات اليوم الواحد
               </a>
               <a href="#matrouh" className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/90 backdrop-blur-sm border border-sky-200 text-ocean font-bold shadow-md hover:bg-white hover:border-sky2 hover:shadow-xl transition-all hover:-translate-y-0.5">
                 <Waves size={16}/> مرسى مطروح
@@ -405,7 +405,7 @@ function FlashOffers() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 border border-orange-200 text-sunset text-[11px] font-bold uppercase tracking-wider mb-3">
             <Flame size={12}/> عروض الصيف
           </div>
-          <h2 className="text-3xl md:text-4xl font-black text-ocean">أفضل <span className="text-sunset">عروض الصيف</span></h2>
+          <h2 className="text-3xl md:text-4xl font-black text-ocean">أقوى <span className="text-sunset">عروضنا دلوقتي</span></h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {FLASH_OFFERS.map(o => {
