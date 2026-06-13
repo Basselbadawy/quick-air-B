@@ -6,8 +6,8 @@ import {
   Waves, Sun, Filter, CheckCircle, ChevronLeft
 } from "lucide-react"
 
-// دالة معرض الصور المتحرك للرحلات
-function ImageSlider({ images }) {
+// 1. دالة معرض الصور المتحرك (تم تعديلها لتناسب الكروت الخارجية وشاشة التفاصيل)
+function ImageSlider({ images, className = "w-full h-full" }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function ImageSlider({ images }) {
   if (!images || images.length === 0) return null;
 
   return (
-    <div className="relative w-full h-52 mb-6 rounded-2xl overflow-hidden group shadow-lg ring-1 ring-sky-100">
+    <div className={`relative overflow-hidden group ${className}`}>
       <img
         src={images[currentIndex]}
         alt={`Slide ${currentIndex + 1}`}
@@ -33,24 +33,24 @@ function ImageSlider({ images }) {
       {images.length > 1 && (
         <>
           <button
-            onClick={(e) => { e.stopPropagation(); goToPrev(); }}
-            className="absolute top-1/2 left-2 -translate-y-1/2 bg-white/80 text-ocean p-2 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-sky2 hover:text-white"
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); goToPrev(); }}
+            className="absolute top-1/2 left-2 -translate-y-1/2 bg-white/80 text-ocean p-1.5 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-sky2 hover:text-white z-10"
           >
-            <ChevronLeft size={18} />
+            <ChevronLeft size={16} />
           </button>
           <button
-            onClick={(e) => { e.stopPropagation(); goToNext(); }}
-            className="absolute top-1/2 right-2 -translate-y-1/2 bg-white/80 text-ocean p-2 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-sky2 hover:text-white"
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); goToNext(); }}
+            className="absolute top-1/2 right-2 -translate-y-1/2 bg-white/80 text-ocean p-1.5 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-sky2 hover:text-white z-10"
           >
-            <ChevronRight size={18} />
+            <ChevronRight size={16} />
           </button>
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
             {images.map((_, idx) => (
               <button
                 key={idx}
-                onClick={(e) => { e.stopPropagation(); setCurrentIndex(idx); }}
-                className={`h-2 rounded-full transition-all ${
-                  idx === currentIndex ? "bg-sunset w-4" : "bg-white/70 w-2"
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setCurrentIndex(idx); }}
+                className={`h-1.5 rounded-full transition-all ${
+                  idx === currentIndex ? "bg-sunset w-4" : "bg-white/70 w-1.5"
                 }`}
               />
             ))}
@@ -61,6 +61,7 @@ function ImageSlider({ images }) {
   );
 }
 
+// 2. مصفوفة الرحلات المحدثة (شاملة الصور الإضافية لكل رحلة للتقليب)
 const DAY_TRIPS = [
   { 
     id: 1, 
@@ -69,14 +70,8 @@ const DAY_TRIPS = [
     image: "/images/6.jpg", 
     program: "القلعة من الخارج بمنطقة الأنفوشى — محطة الرمل — مول سان استيفانو — ملاهي المعمورة", 
     color: "from-blue-500 to-cyan-400",
-    extraImages: [
-      "/images/1.jpg",
-      "/images/2.jpg",
-      "/images/3.jpg",
-      "/images/4.jpg"
-    ]
+    extraImages: [ "/images/1.jpg", "/images/2.jpg", "/images/3.jpg", "/images/4.jpg" ]
   },
-  
   { 
     id: 2, 
     name: "فاميلي بارك", 
@@ -84,52 +79,83 @@ const DAY_TRIPS = [
     image: "/images/14.jpg", 
     program: "دخول قرية فاميلي بارك الترفيهية بالرحاب — سهرة بمول كايرو فيستيفال", 
     color: "from-purple-500 to-pink-400",
-    extraImages: [
-      "/images/7.jpg",
-      "/images/8.jpg",
-      "/images/9.jpg",
-      "/images/10.jpg",
-      "/images/11.jpg",
-      "/images/12.jpg",
-      "/images/13.jpg" 
-    ]
+    extraImages: [ "/images/7.jpg", "/images/8.jpg", "/images/9.jpg", "/images/10.jpg", "/images/11.jpg", "/images/12.jpg", "/images/13.jpg" ]
   },
-  { id:3, name:"بورسعيد", price:450, image:"https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=800&q=80", program:"ركوب المعدية لبور فؤاد — جبال الملح — حديقة فريال — سوق السمك — السوق التجاري", color:"from-teal-500 to-emerald-400" },
-  { id:4, name:"معالم القاهرة", price:500, image:"https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=800&q=80", program:"الأهرامات أو القلعة — الحسين — الأزهر — شارع مجمع الأديان", color:"from-amber-500 to-orange-400" },
-  { id:5, name:"الفيوم", price:600, image:"https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=800&q=80", program:"قرية تونس هاووس — جبل المدورة — شلالات وادي الريان — حفلة شواء — ركوب فلوكة — التزحلق على الرمال", color:"from-green-500 to-teal-400" },
-{ 
-    id: 2, 
-    name: "فاميلي بارك", 
-    price: 500, 
-    image: "/images/14.jpg", 
-    program: "دخول قرية فاميلي بارك الترفيهية بالرحاب — سهرة بمول كايرو فيستيفال", 
-    color: "from-purple-500 to-pink-400",
+  { 
+    id: 3, 
+    name: "بورسعيد", 
+    price: 450, 
+    image: "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=800&q=80", 
+    program: "ركوب المعدية لبور فؤاد — جبال الملح — حديقة فريال — سوق السمك — السوق التجاري", 
+    color: "from-teal-500 to-emerald-400",
     extraImages: [
-      "/images/7.jpg",
-      "/images/8.jpg",
-      "/images/9.jpg",
-      "/images/10.jpg",
-      "/images/11.jpg",
-      "/images/12.jpg",
-      "/images/13.jpg"
+      "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=800&q=80",
+      "https://images.unsplash.com/photo-1559825481-12a05cc00344?w=800&q=80",
+      "https://images.unsplash.com/photo-1548842186-a2dc211ddf4a?w=800&q=80"
     ]
   },
   { 
-    id: 7, 
+    id: 4, 
+    name: "معالم القاهرة", 
+    price: 500, 
+    image: "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=800&q=80", 
+    program: "الأهرامات أو القلعة — الحسين — الأزهر — شارع مجمع الأديان", 
+    color: "from-amber-500 to-orange-400",
+    extraImages: [
+      "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=800&q=80",
+      "https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800&q=80",
+      "https://images.unsplash.com/photo-1585314545511-2eb962f36fdd?w=800&q=80"
+    ]
+  },
+  { 
+    id: 5, 
+    name: "الفيوم", 
+    price: 600, 
+    image: "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=800&q=80", 
+    program: "قرية تونس هاووس — جبل المدورة — شلالات وادي الريان — حفلة شواء — ركوب فلوكة — التزحلق على الرمال", 
+    color: "from-green-500 to-teal-400",
+    extraImages: [
+      "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=800&q=80",
+      "https://images.unsplash.com/photo-1601004116035-7c5da1545620?w=800&q=80",
+      "https://images.unsplash.com/photo-1549420084-25e2db8144cd?w=800&q=80"
+    ]
+  },
+  { 
+    id: 6, 
     name: "رأس البر (الخميس 18/6)", 
     price: 460, 
     image: "/images/17.jpg", 
-    program: "التجمع الخميس 18/6 الساعة 6 ص أمام كلية الآداب — السفر بأحدث الباصات المكيفة — دخول قرية وشواطئ القوات المسلحة (6 أكتوبر) — جولة حرة بالسوق التجاري — سهرة رائعة بمنطقة اللسان", 
-    color: "from-blue-500 to-cyan-400", 
+    program: "التجمع الساعة 6 ص — السفر بأحدث الباصات المكيفة — دخول قرية القوات المسلحة — جولة حرة بالسوق التجاري واللسان", 
+    color: "from-cyan-500 to-blue-400", 
     featured: true,
+    extraImages: [ "/images/15.jpg", "/images/16.jpg", "/images/17.jpg" ]
+  },
+  { 
+    id: 7, 
+    name: "العين السخنة", 
+    price: 700, 
+    image: "https://images.unsplash.com/photo-1542501742-03e5e3f6a79b?w=800&q=80", 
+    program: "فندق لاسيرينا 4 نجوم صف أول على البحر — حمام سباحة — ميني أكوا بارك — ملاهي أطفال — سهرة بورتو السخنة", 
+    color: "from-orange-500 to-red-400",
     extraImages: [
-      "/images/15.jpg", 
-      "/images/16.jpg", 
-      "/images/17.jpg"
+      "https://images.unsplash.com/photo-1542501742-03e5e3f6a79b?w=800&q=80",
+      "https://images.unsplash.com/photo-1580974582391-a6649c82a85f?w=800&q=80",
+      "https://images.unsplash.com/photo-1615887023516-9dc47690f055?w=800&q=80"
     ]
   },
-  
-  { id:8, name:"دريم بارك", price:650, image:"https://images.unsplash.com/photo-1565073182887-6bcefbe225b1?w=800&q=80", program:"دخول مدينة الملاهي دريم بارك — سهرة بمول مصر", color:"from-pink-500 to-rose-400" },
+  { 
+    id: 8, 
+    name: "دريم بارك", 
+    price: 650, 
+    image: "https://images.unsplash.com/photo-1565073182887-6bcefbe225b1?w=800&q=80", 
+    program: "دخول مدينة الملاهي دريم بارك — سهرة بمول مصر", 
+    color: "from-pink-500 to-rose-400",
+    extraImages: [
+      "https://images.unsplash.com/photo-1565073182887-6bcefbe225b1?w=800&q=80",
+      "https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?w=800&q=80",
+      "https://images.unsplash.com/photo-1605333159049-aa572dd2c748?w=800&q=80"
+    ]
+  },
 ]
 
 const MATROUH_TABS = [
@@ -214,11 +240,7 @@ const FLASH_OFFERS = [
     color: "from-sky-400 to-cyan-300", 
     image: "/images/r1.jpg",
     program: "التجمع الخميس 18/6 الساعة 6 ص أمام كلية الآداب — السفر بأحدث الباصات المكيفة — دخول قرية وشواطئ القوات المسلحة — جولة حرة بالسوق التجاري — سهرة رائعة بمنطقة اللسان",
-    extraImages: [
-      "/images/r1.jpg", 
-      "/images/r2.jpg", 
-      "/images/r3.jpg"
-    ]
+    extraImages: [ "/images/15.jpg", "/images/16.jpg", "/images/17.jpg" ]
   },
   { 
     id: 2, 
@@ -230,7 +252,11 @@ const FLASH_OFFERS = [
     color: "from-cyan-400 to-sky-400", 
     image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80",
     program: "إقامة مميزة في برج السرايا بمطروح — شقة غرفتين مجهزة بالكامل — قريبة من البحر والخدمات — شاملة الانتقالات ذهاب وعودة من الزقازيق",
-    extraImages: [] // تقدر تضيف هنا لينكات صور مطروح بعدين
+    extraImages: [
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+      "https://images.unsplash.com/photo-1542501742-03e5e3f6a79b?w=800&q=80"
+    ]
   },
   { 
     id: 3, 
@@ -242,17 +268,20 @@ const FLASH_OFFERS = [
     color: "from-amber-400 to-orange-300", 
     image: "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=800&q=80",
     program: "قرية تونس هاووس — جبل المدورة — شلالات وادي الريان — حفلة شواء مميزة — ركوب فلوكة — التزحلق على الرمال",
-    extraImages: [] // تقدر تضيف هنا لينكات صور الفيوم بعدين
+    extraImages: [
+      "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=800&q=80",
+      "https://images.unsplash.com/photo-1601004116035-7c5da1545620?w=800&q=80"
+    ] 
   },
 ]
 
 const WHY_US = [
-  { icon:Users,  title:"مشرف خاص",       desc:"مشرف متمرن مع كل فوج طوال الرحلة",           color:"text-sky-600",     bg:"bg-sky-100" },
+  { icon:Users,  title:"مشرف خاص",       desc:"مشرف متمرن مع كل فوج طوال الرحلة",            color:"text-sky-600",     bg:"bg-sky-100" },
   { icon:Bus,    title:"انتقالات مجانية", desc:"أتوبيسات مريحة من الزقازيق ذهاباً وعودةً",    color:"text-emerald-600", bg:"bg-emerald-100" },
-  { icon:Home,   title:"شقق مجهزة",       desc:"شقق مكيفة بالكامل مع جميع المرافق",           color:"text-orange-600",  bg:"bg-orange-100" },
-  { icon:Shield, title:"تأمين سفر",       desc:"تغطية شاملة لجميع أفراد الرحلة",              color:"text-ocean",       bg:"bg-blue-100" },
-  { icon:Waves,  title:"شواطئ خاصة",      desc:"أتوبيسات داخلية للشواطئ المميزة مجاناً",      color:"text-cyan-600",    bg:"bg-cyan-100" },
-  { icon:Star,   title:"جودة مضمونة",     desc:"أكثر من 500 عميل سعيد في موسم واحد",          color:"text-amber-600",   bg:"bg-amber-100" },
+  { icon:Home,   title:"شقق مجهزة",       desc:"شقق مكيفة بالكامل مع جميع المرافق",            color:"text-orange-600",  bg:"bg-orange-100" },
+  { icon:Shield, title:"تأمين سفر",       desc:"تغطية شاملة لجميع أفراد الرحلة",               color:"text-ocean",       bg:"bg-blue-100" },
+  { icon:Waves,  title:"شواطئ خاصة",      desc:"أتوبيسات داخلية للشواطئ المميزة مجاناً",       color:"text-cyan-600",    bg:"bg-cyan-100" },
+  { icon:Star,   title:"جودة مضمونة",     desc:"أكثر من 500 عميل سعيد في موسم واحد",           color:"text-amber-600",   bg:"bg-amber-100" },
 ]
 
 const WHATSAPP = "201063278868"
@@ -342,7 +371,6 @@ function Hero({ loading, onBook }) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=75" alt="شاطئ صيفي بمياه فيروزية ورمال ذهبية" className="absolute inset-0 w-full h-full object-cover"/>
-      {/* طبقة فاتحة ومشرقة بدلاً من السوداء */}
       <div className="absolute inset-0 bg-gradient-to-b from-sky-200/40 via-sky-100/30 to-white"/>
       <div className="absolute inset-0 bg-gradient-to-tr from-white/50 to-transparent"/>
       <div className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full bg-sky2/20 blur-3xl animate-float"/>
@@ -413,13 +441,18 @@ function FlashOffers() {
             return (
               <div key={o.id} className="group rounded-2xl overflow-hidden bg-white border border-sky-100 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
                 <div className="relative h-44 overflow-hidden">
-                  <img src={o.image} alt={o.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
-                  <div className={`absolute inset-0 bg-gradient-to-t ${o.color} opacity-30`}/>
-                  <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-[12px] font-black text-ocean bg-white/90 backdrop-blur-sm shadow-sm">{o.badge}</span>
+                  {/* دمج الـ Slider بدلاً من الصورة الثابتة */}
+                  {o.extraImages && o.extraImages.length > 0 ? (
+                    <ImageSlider images={o.extraImages} className="w-full h-full" />
+                  ) : (
+                    <img src={o.image} alt={o.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
+                  )}
+                  <div className={`absolute inset-0 bg-gradient-to-t ${o.color} opacity-30 pointer-events-none`}/>
+                  <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-[12px] font-black text-ocean bg-white/90 backdrop-blur-sm shadow-sm z-20">{o.badge}</span>
                 </div>
                 <div className="p-5">
                   <h3 className="text-lg font-black text-ocean mb-1">{o.title}</h3>
-                  <p className="text-[13px] text-slate-600 mb-3">{o.subtitle}</p>
+                  <p className="text-[13px] text-slate-600 mb-3 line-clamp-2">{o.subtitle}</p>
                   <div className="flex items-center gap-1.5 text-xs font-bold text-sunset bg-orange-100 px-2.5 py-1 rounded-full w-fit mb-4">
                     <Clock size={11}/> باقي على الإغلاق: {o.countdown} أيام
                   </div>
@@ -428,7 +461,6 @@ function FlashOffers() {
                       <div className="text-[10px] text-slate-500">يبدأ من</div>
                       <div className="text-xl font-black text-sunset">{o.price}</div>
                     </div>
-                    {/* إضافة زرار التفاصيل بجوار احجز */}
                     <div className="flex items-center gap-2">
                       <button onClick={() => setSelected(o)}
                         className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-[12px] font-bold text-ocean bg-sky-50 hover:bg-sky-100 border border-sky-200 hover:border-sky2 transition-all">
@@ -448,21 +480,19 @@ function FlashOffers() {
         </div>
       </div>
 
-      {/* نافذة التفاصيل (المودال) */}
       {selected && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-ocean-dark/50 backdrop-blur-sm" onClick={() => setSelected(null)}>
           <div className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl border border-sky-100 shadow-2xl" onClick={e => e.stopPropagation()}>
-            <button onClick={() => setSelected(null)} className="absolute top-4 right-4 bg-white/90 text-ocean p-2 rounded-full shadow-md hover:bg-sunset hover:text-white transition-all z-10"><X size={18}/></button>
+            <button onClick={() => setSelected(null)} className="absolute top-4 right-4 bg-white/90 text-ocean p-2 rounded-full shadow-md hover:bg-sunset hover:text-white transition-all z-20"><X size={18}/></button>
             
-            <div className="p-6">
+            <div className="p-6 pt-12">
               <h2 className="text-2xl font-black text-ocean mb-1">عرض {selected.title}</h2>
               <p className="text-2xl text-sunset font-black mb-5 border-b border-sky-100 pb-4">
                 {selected.price}
               </p>
 
-              {/* يعرض الصور المتحركة لو متوفرة، أو صورة الغلاف */}
               {selected.extraImages && selected.extraImages.length > 0 ? (
-                <ImageSlider images={selected.extraImages} />
+                <ImageSlider images={selected.extraImages} className="w-full h-52 mb-6 rounded-2xl shadow-lg ring-1 ring-sky-100" />
               ) : (
                 <img src={selected.image} alt={selected.title} className="w-full h-52 object-cover rounded-2xl border border-sky-100 mb-6 shadow-lg" />
               )}
@@ -518,9 +548,13 @@ function DayTrips() {
                   <div className="absolute top-0 inset-x-0 z-20 bg-gradient-to-r from-sunset to-amber-500 py-1 text-center text-[11px] font-black text-white">الأكثر طلباً</div>
                 )}
                 
-                {/* تم إزالة طبقة اللون بالكامل من هنا لجميع البرامج */}
                 <div className={`relative h-36 overflow-hidden ${trip.featured?"mt-7":""}`}>
-                  <img src={trip.image} alt={trip.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
+                  {/* دمج الـ Slider بدلاً من الصورة الثابتة */}
+                  {trip.extraImages && trip.extraImages.length > 0 ? (
+                    <ImageSlider images={trip.extraImages} className="w-full h-full" />
+                  ) : (
+                    <img src={trip.image} alt={trip.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
+                  )}
                 </div>
                 
                 <div className="p-4">
@@ -542,17 +576,16 @@ function DayTrips() {
         {selected && (
           <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-ocean-dark/50 backdrop-blur-sm" onClick={() => setSelected(null)}>
             <div className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl border border-sky-100 shadow-2xl" onClick={e => e.stopPropagation()}>
-              <button onClick={() => setSelected(null)} className="absolute top-4 right-4 bg-white/90 text-ocean p-2 rounded-full shadow-md hover:bg-sunset hover:text-white transition-all z-10"><X size={18}/></button>
+              <button onClick={() => setSelected(null)} className="absolute top-4 right-4 bg-white/90 text-ocean p-2 rounded-full shadow-md hover:bg-sunset hover:text-white transition-all z-20"><X size={18}/></button>
               
-              <div className="p-6">
+              <div className="p-6 pt-12">
                 <h2 className="text-2xl font-black text-ocean mb-1">رحلة {selected.name}</h2>
                 <p className="text-2xl text-sunset font-black mb-5 border-b border-sky-100 pb-4">
                   {selected.price} جنيه <span className="text-sm font-normal text-slate-500">/ للفرد</span>
                 </p>
 
-                {/* استدعاء الـ Slider هنا لجميع الصور */}
                 {selected.extraImages && selected.extraImages.length > 0 ? (
-                  <ImageSlider images={selected.extraImages} />
+                  <ImageSlider images={selected.extraImages} className="w-full h-52 mb-6 rounded-2xl shadow-lg ring-1 ring-sky-100" />
                 ) : (
                   <img src={selected.image} alt={selected.name} className="w-full h-52 object-cover rounded-2xl border border-sky-100 mb-6 shadow-lg" />
                 )}
@@ -1036,132 +1069,5 @@ function WhyUs() {
         </div>
       </div>
     </section>
-  )
-}
-
-function Footer() {
-  return (
-    <footer className="bg-ocean-dark text-sky-100 px-4 pt-12 pb-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
-          <div>
-            <div className="text-[20px] font-black bg-gradient-to-r from-sky2 to-white bg-clip-text text-transparent mb-1">Quick Air Zagazig</div>
-            <div className="text-[11px] text-sky-200/70 mb-3">كويك اير للسياحة والطيران — الزقازيق</div>
-            <p className="text-[12px] text-sky-100/80 leading-relaxed max-w-xs">وكالة سياحية متخصصة في الرحلات الداخلية وتذاكر الطيران من قلب الزقازيق — خبرة أكثر من 10 سنوات.</p>
-          </div>
-          <div>
-            <h4 className="text-[13px] font-bold text-white mb-3">روابط سريعة</h4>
-            <ul className="space-y-2">
-              {[["رحلات اليوم الواحد","#daytrips"],["إقامات مطروح وبورسعيد","#matrouh"],["رحلات دهب","#dahab"],["تذاكر طيران","#flights"],["ليه كويك اير؟","#why"]].map(([l,h]) => (
-                <li key={h}><a href={h} className="text-[12px] text-sky-100/80 hover:text-sunset transition-colors flex items-center gap-1.5"><ChevronRight size={12}/>{l}</a></li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-[13px] font-bold text-white mb-3">تواصل معنا</h4>
-            <div className="space-y-2">
-              {PHONES.map(p => (
-                <a key={p} href={`tel:${p}`} className="flex items-center gap-2 text-[13px] font-bold text-sky-100 hover:text-sunset transition-colors">
-                  <Phone size={13} className="text-sky2"/>{p}
-                </a>
-              ))}
-              <a href={waLink("مرحباً Quick Air! أريد الاستفسار عن رحلاتكم")} target="_blank" rel="noreferrer"
-                className="flex items-center gap-2 text-[13px] font-semibold text-emerald-400 hover:text-emerald-300 transition-colors">
-                <MessageCircle size={13}/> واتساب مباشر
-              </a>
-              <p className="flex items-start gap-2 text-[12px] text-sky-200/70 pt-1">
-                <MapPin size={13} className="flex-shrink-0 mt-0.5"/> الزقازيق، محافظة الشرقية، مصر
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="border-t border-white/10 pt-5 flex flex-wrap items-center justify-between gap-2 text-[11px] text-sky-200/70">
-          <span>© 2026 <span className="text-sky2 font-bold">Quick Air Zagazig</span> — جميع الحقوق محفوظة</span>
-          <span>صُنع بواسطة <span className="text-white font-bold">باسل بدوي</span></span>
-        </div>
-      </div>
-    </footer>
-  )
-}
-
-function BookingModal({ open, onClose }) {
-  const [form, setForm] = useState({name:"",phone:"",dest:"",type:"رحلة يوم",pax:"2",date:"",notes:""})
-  const set = k => e => setForm(f=>({...f,[k]:e.target.value}))
-  const submit = () => {
-    if(!form.name||!form.phone){alert("من فضلك أدخل اسمك ورقم هاتفك");return}
-    window.open(waLink(`طلب حجز — Quick Air Zagazig\nالاسم: ${form.name}\nالموبايل: ${form.phone}\nالوجهة: ${form.dest||"غير محدد"}\nنوع الرحلة: ${form.type}\nالعدد: ${form.pax} أفراد\nالتاريخ: ${form.date||"مرن"}\nملاحظات: ${form.notes||"—"}`),"_blank")
-    onClose()
-  }
-  if(!open) return null
-  const inp = "w-full bg-sky-50 border border-sky-200 rounded-xl px-4 py-3 text-slate-800 text-[14px] outline-none focus:border-sky2 focus:bg-white transition-colors placeholder:text-slate-400"
-  return (
-    <div className="fixed inset-0 z-[300] flex items-center justify-center p-4" style={{background:"rgba(8,47,73,.55)",backdropFilter:"blur(12px)"}} onClick={e=>e.target===e.currentTarget&&onClose()}>
-      <div className="bg-white border border-sky-100 rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl">
-        <div className="flex items-center justify-between mb-5">
-          <h3 className="text-[17px] font-black text-ocean">احجز رحلتك</h3>
-          <button onClick={onClose} className="text-slate-400 hover:text-ocean transition-colors"><X size={18}/></button>
-        </div>
-        <div className="space-y-3">
-          {[["الاسم الكامل","name","text","محمد أحمد"],["رقم الهاتف","phone","tel","01063278868"],["الوجهة","dest","text","مطروح / شرم / السخنة..."],["عدد الأفراد","pax","number","2"],["تاريخ السفر","date","date",""]].map(([l,k,t,pl]) => (
-            <div key={k}>
-              <label className="block text-[11px] font-bold text-ocean uppercase tracking-wider mb-1.5">{l}</label>
-              <input type={t} placeholder={pl} value={form[k]} onChange={set(k)} className={inp}/>
-            </div>
-          ))}
-          <div>
-            <label className="block text-[11px] font-bold text-ocean uppercase tracking-wider mb-1.5">نوع الرحلة</label>
-            <select value={form.type} onChange={set("type")} className={inp+" appearance-none"}>
-              {["رحلة يوم","إقامة (أيام)","تذكرة طيران","عمرة"].map(o=><option key={o} value={o}>{o}</option>)}
-            </select>
-          </div>
-          <div>
-            <label className="block text-[11px] font-bold text-ocean uppercase tracking-wider mb-1.5">ملاحظات</label>
-            <textarea rows={2} placeholder="أي طلبات خاصة؟" value={form.notes} onChange={set("notes")} className={inp+" resize-none"}/>
-          </div>
-        </div>
-        <button onClick={submit} className="mt-5 w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-black text-[15px] text-white shadow-lg" style={{background:"linear-gradient(135deg,#25D366,#128C7E)"}}>
-          <MessageCircle size={17}/> أرسل طلبك على واتساب
-        </button>
-      </div>
-    </div>
-  )
-}
-
-export default function App() {
-  const [loading, setLoading]         = useState(true)
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [modalOpen, setModalOpen]     = useState(false)
-
-  useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 1400)
-    return () => clearTimeout(t)
-  }, [])
-
-  return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-800" dir="rtl" style={{fontFamily:"'Cairo',sans-serif"}}>
-      <button onClick={() => setSidebarOpen(true)}
-        className="fixed top-1/2 -translate-y-1/2 right-0 z-40 bg-sky2 hover:bg-ocean-soft text-white rounded-l-xl px-2 py-4 flex flex-col items-center gap-1.5 shadow-xl transition-all hover:-translate-x-0.5">
-        <Filter size={16}/>
-        <span className="text-[9px] font-black" style={{writingMode:"vertical-rl"}}>القائمة</span>
-      </button>
-      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)}/>
-      <Navbar onBook={() => setModalOpen(true)}/>
-      <main>
-        <Hero loading={loading} onBook={() => setModalOpen(true)}/>
-        <FlashOffers/>
-        <DayTrips/>
-        <MatrouhPackages/>
-        <DahabSection/>
-        <FlightsSection/>
-        <WhyUs/>
-      </main>
-      <Footer/>
-      <BookingModal open={modalOpen} onClose={() => setModalOpen(false)}/>
-      <a href={waLink("مرحباً Quick Air! أريد الاستفسار عن رحلاتكم")} target="_blank" rel="noreferrer"
-        className="fixed bottom-6 left-6 z-50 w-14 h-14 flex items-center justify-center rounded-full shadow-2xl shadow-emerald-500/40 animate-bounce"
-        style={{background:"linear-gradient(135deg,#25D366,#128C7E)"}}>
-        <MessageCircle size={26} className="text-white"/>
-      </a>
-    </div>
   )
 }
