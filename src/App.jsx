@@ -1,4 +1,4 @@
-// بيانات رحلة السخنة الجديدة
+// بيانات رحلة السخنة الجديدة (تتحط هنا بعد الـ imports مباشرة)
 const SOKHNA_OFFER = {
   id: "sokhna-lo2lo2a-offer",
   title: "العين السخنة - قرية اللؤلؤة",
@@ -14,7 +14,7 @@ const SOKHNA_OFFER = {
   program: "رحلة يوم الإثنين 7 / 6 لقرية اللؤلؤة بالعين السخنة. هنتحرك الصبح بدري عشان نلحق اليوم من أوله، هنوصل وننزل البحر براحتنا، وهنتصور أحلى صور للذكرى. البرنامج يشمل الانتقالات بأحدث الباصات السياحية المكيفة ورسوم دخول الشاطئ."
 };
 
-function FlashOffers() {
+export function FlashOffers() {
   const [selected, setSelected] = useState(null)
 
   // دمج عرض السخنة ليكون في مقدمة العروض الصيفية
@@ -119,7 +119,7 @@ function FlashOffers() {
   )
 }
 
-function DayTrips() {
+export function DayTrips() {
   const [selected, setSelected] = useState(null)
   return (
     <>
