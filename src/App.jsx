@@ -1,5 +1,24 @@
+// بيانات رحلة السخنة الجديدة
+const SOKHNA_OFFER = {
+  id: "sokhna-lo2lo2a-offer",
+  title: "العين السخنة - قرية اللؤلؤة",
+  subtitle: "يوم كامل على البحر بشاطئ القوات المسلحة (أمان ونظافة تامّة)",
+  price: "400 ج.م",
+  countdown: "7", 
+  color: "from-cyan-500 to-blue-600",
+  badge: "عرض خاص 🔥",
+  image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+  extraImages: [
+    "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80"
+  ],
+  program: "رحلة يوم الإثنين 7 / 6 لقرية اللؤلؤة بالعين السخنة. هنتحرك الصبح بدري عشان نلحق اليوم من أوله، هنوصل وننزل البحر براحتنا، وهنتصور أحلى صور للذكرى. البرنامج يشمل الانتقالات بأحدث الباصات السياحية المكيفة ورسوم دخول الشاطئ."
+};
+
 function FlashOffers() {
   const [selected, setSelected] = useState(null)
+
+  // دمج عرض السخنة ليكون في مقدمة العروض الصيفية
+  const allFlashOffers = typeof FLASH_OFFERS !== 'undefined' ? [SOKHNA_OFFER, ...FLASH_OFFERS] : [SOKHNA_OFFER];
 
   return (
     <section className="py-16 px-4 bg-sun-soft">
@@ -11,7 +30,7 @@ function FlashOffers() {
           <h2 className="text-3xl md:text-4xl font-black text-ocean">أقوى <span className="text-sunset">عروضنا دلوقتي</span></h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {FLASH_OFFERS.map(o => {
+          {allFlashOffers.map(o => {
             const msg = `مرحباً Quick Air!\nأريد الاستفسار عن:\n${o.title}\n${o.subtitle}\nالسعر: ${o.price}`
             // دمج الصورة الأساسية مع الصور الإضافية ليتم عرضهم معاً في السلايدر
             const allImages = [o.image, ...(o.extraImages || [])]
