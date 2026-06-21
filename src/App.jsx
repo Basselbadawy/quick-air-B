@@ -212,33 +212,46 @@ const FLASH_OFFERS = [
     price: "400 جـ", 
     countdown: 4, 
     color: "from-blue-500 to-indigo-400", 
-    image: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80", // ممكن تغيرها بصورة السخنة بعدين
+    image: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80", 
     program: "هنتحرك الصبح بدري وننزل البحر براحتنا في قرية اللؤلؤة التابعة للقوات المسلحة (أمان تام ونظافة) — وقت حر للغداء والاستراحة — التجمع بالليل للعودة وإحنا فاصلين شحن ومغيرين جو بجد!",
-    extraImages: [] 
+    extraImages: [
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80",
+      "https://images.unsplash.com/photo-1520116468816-95b69f847357?w=800&q=80",
+      "https://images.unsplash.com/photo-1512686159675-cbdf33c3edeb?w=800&q=80"
+    ] 
   },
   { 
     id: 2, 
-    badge: "عرض العيد", 
-    title: "برج السرايا — مطروح", 
-    subtitle: "شقة 2 غرفة — 6 أيام / 5 ليالي", 
-    price: "7,550 جـ", 
+    badge: "الأكثر طلباً", 
+    title: "الإسكندرية", 
+    subtitle: "القلعة — محطة الرمل — سان استيفانو — المعمورة", 
+    price: "500 جـ", 
     countdown: 5, 
-    color: "from-cyan-400 to-sky-400", 
-    image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80",
-    program: "إقامة مميزة في برج السرايا بمطروح — شقة غرفتين مجهزة بالكامل — قريبة من البحر والخدمات — شاملة الانتقالات ذهاب وعودة من الزقازيق",
-    extraImages: [] 
+    color: "from-blue-500 to-cyan-400", 
+    image: "/images/6.jpg",
+    program: "رحلة ممتعة لعروس البحر المتوسط شاملة زيارة القلعة من الخارج بمنطقة الأنفوشي — جولة حرة في محطة الرمل — تسوق في مول سان استيفانو — ووقت ممتع في ملاهي المعمورة.",
+    extraImages: [
+      "/images/1.jpg",
+      "/images/2.jpg",
+      "/images/3.jpg",
+      "/images/4.jpg"
+    ]
   },
   { 
     id: 3, 
     badge: "حصري", 
-    title: "الفيوم", 
-    subtitle: "شلالات الريان + بحيرة قارون + شواء", 
-    price: "600 جـ", 
-    countdown: 7, 
-    color: "from-amber-400 to-orange-300", 
-    image: "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=800&q=80",
-    program: "قرية تونس هاووس — جبل المدورة — شلالات وادي الريان — حفلة شواء مميزة — ركوب فلوكة — التزحلق على الرمال",
-    extraImages: [] 
+    title: "معالم القاهرة", 
+    subtitle: "الأهرامات أو القلعة — الحسين — مجمع الأديان", 
+    price: "500 جـ", 
+    countdown: 6, 
+    color: "from-amber-500 to-orange-400", 
+    image: "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=800&q=80",
+    program: "يوم مميز في قلب العاصمة يشمل زيارة الأهرامات أو القلعة — جولة روحانية في الحسين والأزهر — وزيارة لشارع مجمع الأديان للتعرف على عبق التاريخ.",
+    extraImages: [
+      "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=800&q=80",
+      "https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800&q=80",
+      "https://images.unsplash.com/photo-1539650116574-8efeb43e2b50?w=800&q=80"
+    ] 
   },
 ]
 
