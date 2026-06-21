@@ -210,14 +210,13 @@ const FLASH_OFFERS = [
     title: "العين السخنة (الإثنين 7/6)", 
     subtitle: "قرية اللؤلؤة (قوات مسلحة) — يوم كامل على البحر", 
     price: "400 جـ", 
-    countdown: 4, 
     color: "from-blue-500 to-indigo-400", 
-    image: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80", 
+    image: "/images/s1.jpg", // غيّر s1.jpg باسم صورة السخنة اللي عندك
     program: "هنتحرك الصبح بدري وننزل البحر براحتنا في قرية اللؤلؤة التابعة للقوات المسلحة (أمان تام ونظافة) — وقت حر للغداء والاستراحة — التجمع بالليل للعودة وإحنا فاصلين شحن ومغيرين جو بجد!",
     extraImages: [
-      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80",
-      "https://images.unsplash.com/photo-1520116468816-95b69f847357?w=800&q=80",
-      "https://images.unsplash.com/photo-1512686159675-cbdf33c3edeb?w=800&q=80"
+      "/images/s1.jpg", // صور السلايدر للسخنة
+      "/images/s2.jpg",
+      "/images/s3.jpg"
     ] 
   },
   { 
@@ -226,7 +225,6 @@ const FLASH_OFFERS = [
     title: "الإسكندرية", 
     subtitle: "القلعة — محطة الرمل — سان استيفانو — المعمورة", 
     price: "500 جـ", 
-    countdown: 5, 
     color: "from-blue-500 to-cyan-400", 
     image: "/images/6.jpg",
     program: "رحلة ممتعة لعروس البحر المتوسط شاملة زيارة القلعة من الخارج بمنطقة الأنفوشي — جولة حرة في محطة الرمل — تسوق في مول سان استيفانو — ووقت ممتع في ملاهي المعمورة.",
@@ -243,18 +241,109 @@ const FLASH_OFFERS = [
     title: "معالم القاهرة", 
     subtitle: "الأهرامات أو القلعة — الحسين — مجمع الأديان", 
     price: "500 جـ", 
-    countdown: 6, 
     color: "from-amber-500 to-orange-400", 
-    image: "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=800&q=80",
+    image: "/images/c1.jpg", // غيّر c1.jpg باسم صورة القاهرة اللي عندك
     program: "يوم مميز في قلب العاصمة يشمل زيارة الأهرامات أو القلعة — جولة روحانية في الحسين والأزهر — وزيارة لشارع مجمع الأديان للتعرف على عبق التاريخ.",
     extraImages: [
-      "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=800&q=80",
-      "https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800&q=80",
-      "https://images.unsplash.com/photo-1539650116574-8efeb43e2b50?w=800&q=80"
+      "/images/c1.jpg", // صور السلايدر للقاهرة
+      "/images/c2.jpg",
+      "/images/c3.jpg"
     ] 
   },
 ]
 
+function FlashOffers() {
+  const [selected, setSelected] = useState(null)
+
+  return (
+    <section className="py-16 px-4 bg-sun-soft">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 border border-orange-200 text-sunset text-[11px] font-bold uppercase tracking-wider mb-3">
+            <Flame size={12}/> عروض الصيف
+          </div>
+          <h2 className="text-3xl md:text-4xl font-black text-ocean">أقوى <span className="text-sunset">عروضنا دلوقتي</span></h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {FLASH_OFFERS.map(o => {
+            const msg = `مرحباً Quick Air!\nأريد الاستفسار عن:\n${o.title}\n${o.subtitle}\nالسعر: ${o.price}`
+            return (
+              <div key={o.id} className="group rounded-2xl overflow-hidden bg-white border border-sky-100 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+                <div className="relative h-44 overflow-hidden">
+                  <img src={o.image} alt={o.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
+                  <div className={`absolute inset-0 bg-gradient-to-t ${o.color} opacity-30`}/>
+                  <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-[12px] font-black text-ocean bg-white/90 backdrop-blur-sm shadow-sm">{o.badge}</span>
+                </div>
+                <div className="p-5">
+                  <h3 className="text-lg font-black text-ocean mb-1">{o.title}</h3>
+                  <p className="text-[13px] text-slate-600 mb-3">{o.subtitle}</p>
+                  
+                  {/* تم إزالة قسم "باقي على الإغلاق" من هنا بالكامل */}
+
+                  <div className="flex items-center justify-between pt-3 border-t border-sky-100">
+                    <div>
+                      <div className="text-[10px] text-slate-500">يبدأ من</div>
+                      <div className="text-xl font-black text-sunset">{o.price}</div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button onClick={() => setSelected(o)}
+                        className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-[12px] font-bold text-ocean bg-sky-50 hover:bg-sky-100 border border-sky-200 hover:border-sky2 transition-all">
+                        <ArrowRight size={13}/> التفاصيل
+                      </button>
+                      <a href={waLink(msg)} target="_blank" rel="noreferrer"
+                        className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] font-bold text-white shadow-md"
+                        style={{background:"linear-gradient(135deg,#25D366,#128C7E)"}}>
+                        <MessageCircle size={14}/> احجز
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* نافذة التفاصيل (المودال) */}
+      {selected && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-ocean-dark/50 backdrop-blur-sm" onClick={() => setSelected(null)}>
+          <div className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl border border-sky-100 shadow-2xl" onClick={e => e.stopPropagation()}>
+            <button onClick={() => setSelected(null)} className="absolute top-4 right-4 bg-white/90 text-ocean p-2 rounded-full shadow-md hover:bg-sunset hover:text-white transition-all z-10"><X size={18}/></button>
+            
+            <div className="p-6">
+              <h2 className="text-2xl font-black text-ocean mb-1">عرض {selected.title}</h2>
+              <p className="text-2xl text-sunset font-black mb-5 border-b border-sky-100 pb-4">
+                {selected.price}
+              </p>
+
+              {/* يعرض الصور المتحركة لو متوفرة، أو صورة الغلاف */}
+              {selected.extraImages && selected.extraImages.length > 0 ? (
+                <ImageSlider images={selected.extraImages} />
+              ) : (
+                <img src={selected.image} alt={selected.title} className="w-full h-52 object-cover rounded-2xl border border-sky-100 mb-6 shadow-lg" />
+              )}
+
+              <h3 className="text-base font-bold text-sky2 mb-2">تفاصيل البرنامج:</h3>
+              <p className="text-slate-700 text-[14px] leading-relaxed mb-5 bg-sky-50 p-4 rounded-xl border border-sky-100">{selected.program}</p>
+
+              <h3 className="text-base font-bold text-sky2 mb-2">شروط الحجز:</h3>
+              <ul className="space-y-2 mb-6">
+                {[
+                  "التجمع في المواعيد المحددة بالزقازيق، وأي تأخير يسقط حق العميل في الرحلة.",
+                  "الحجز المسبق ضروري ومؤكد بدفع العربون لتأكيد الأماكن.",
+                  "البرنامج يشمل الانتقالات بأحدث الباصات المكيفة."
+                ].map((item,i) => (
+                  <li key={i} className="flex gap-2 items-start text-[13px] text-slate-700">
+                    <CheckCircle size={15} className="text-emerald-500 flex-shrink-0 mt-0.5"/>{item}
+                  </li>
+                ))}
+              </ul>
+
+              <a href={waLink(`مرحباً كويك اير!\nأريد تأكيد حجز عرض: ${selected.title}\nالسعر: ${selected.price}\nممكن التفاصيل وطرق الدفع؟`)}
+                target="_blank" rel="noreferrer"
+                className="flex items-center justify-center gap-2 w-full text-white font-black py-4 rounded-xl hover:-translate-y-0.5 transition-all shadow-lg"
+                style={{background:"linear-gradient(135deg,#25D366,#128C7E)"}}>
+                <MessageCircle size={17}/> تأ
 const WHY_US = [
   { icon:Users,  title:"مشرف خاص",       desc:"مشرف متمرن مع كل فوج طوال الرحلة",           color:"text-sky-600",     bg:"bg-sky-100" },
   { icon:Bus,    title:"انتقالات مجانية", desc:"أتوبيسات مريحة من الزقازيق ذهاباً وعودةً",    color:"text-emerald-600", bg:"bg-emerald-100" },
