@@ -211,15 +211,15 @@ const FLASH_OFFERS = [
     subtitle: "قرية اللؤلؤة (قوات مسلحة) — يوم كامل على البحر", 
     price: "400 جـ", 
     color: "from-blue-500 to-indigo-400", 
-    image: "/images/23.jpg", // غيّر s1.jpg باسم صورة السخنة اللي عندك
+    image: "/images/23.png", // غيّر s1.jpg باسم صورة السخنة اللي عندك
     program: "هنتحرك الصبح بدري وننزل البحر براحتنا في قرية اللؤلؤة التابعة للقوات المسلحة (أمان تام ونظافة) — وقت حر للغداء والاستراحة — التجمع بالليل للعودة وإحنا فاصلين شحن ومغيرين جو بجد!",
     extraImages: [
-      "/images/21.jpg", // صور السلايدر للسخنة
-      "/images/22.jpg",
-      "/images/23.jpg",
-      "/images/24.jpg",
-      "/images/25.jpg",
-      "/images/26.jpg",
+      "/images/21.png", // صور السلايدر للسخنة
+      "/images/22.png",
+      "/images/23.png",
+      "/images/24.png",
+      "/images/25.png",
+      "/images/26.png",
     ] 
   },
   { 
