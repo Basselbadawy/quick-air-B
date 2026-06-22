@@ -5,6 +5,12 @@ import {
   Home, Shield, Menu, X, ArrowRight,
   Waves, Sun, Filter, CheckCircle, ChevronLeft
 } from "lucide-react"
+import { createClient } from '@supabase/supabase-js'
+
+// ── إعدادات Supabase (سيتم قراءة الروابط والمفاتيح من ملف .env.local) ──
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder.supabase.co'
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder'
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 // دالة معرض الصور المتحرك للرحلات
 function ImageSlider({ images }) {
@@ -14,7 +20,7 @@ function ImageSlider({ images }) {
     if (!images || images.length <= 1) return;
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000); // تقليب تلقائي كل 3 ثواني
+    }, 3000); 
     return () => clearInterval(interval);
   }, [images]);
 
@@ -61,6 +67,7 @@ function ImageSlider({ images }) {
   );
 }
 
+// ── البيانات الاحتياطية (Fallbacks) في حالة عدم استجابة السيرفر ──
 const DAY_TRIPS = [
   { 
     id: 1, 
@@ -76,7 +83,6 @@ const DAY_TRIPS = [
       "/images/4.jpg"
     ]
   },
-  
   { 
     id: 2, 
     name: "فاميلي بارك", 
@@ -97,23 +103,6 @@ const DAY_TRIPS = [
   { id:3, name:"بورسعيد", price:450, image:"https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=800&q=80", program:"ركوب المعدية لبور فؤاد — جبال الملح — حديقة فريال — سوق السمك — السوق التجاري", color:"from-teal-500 to-emerald-400" },
   { id:4, name:"معالم القاهرة", price:500, image:"https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=800&q=80", program:"الأهرامات أو القلعة — الحسين — الأزهر — شارع مجمع الأديان", color:"from-amber-500 to-orange-400" },
   { id:5, name:"الفيوم", price:600, image:"https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=800&q=80", program:"قرية تونس هاووس — جبل المدورة — شلالات وادي الريان — حفلة شواء — ركوب فلوكة — التزحلق على الرمال", color:"from-green-500 to-teal-400" },
-{ 
-    id: 2, 
-    name: "فاميلي بارك", 
-    price: 500, 
-    image: "/images/14.jpg", 
-    program: "دخول قرية فاميلي بارك الترفيهية بالرحاب — سهرة بمول كايرو فيستيفال", 
-    color: "from-purple-500 to-pink-400",
-    extraImages: [
-      "/images/7.jpg",
-      "/images/8.jpg",
-      "/images/9.jpg",
-      "/images/10.jpg",
-      "/images/11.jpg",
-      "/images/12.jpg",
-      "/images/13.jpg"
-    ]
-  },
   { 
     id: 7, 
     name: "رأس البر (الخميس 18/6)", 
@@ -128,7 +117,6 @@ const DAY_TRIPS = [
       "/images/17.jpg"
     ]
   },
-  
   { id:8, name:"دريم بارك", price:650, image:"https://images.unsplash.com/photo-1565073182887-6bcefbe225b1?w=800&q=80", program:"دخول مدينة الملاهي دريم بارك — سهرة بمول مصر", color:"from-pink-500 to-rose-400" },
 ]
 
@@ -211,10 +199,10 @@ const FLASH_OFFERS = [
     subtitle: "قرية اللؤلؤة (قوات مسلحة) — يوم كامل على البحر", 
     price: "400 جـ", 
     color: "from-blue-500 to-indigo-400", 
-    image: "/images/23.png", // غيّر s1.jpg باسم صورة السخنة اللي عندك
+    image: "/images/23.png", 
     program: "هنتحرك الصبح بدري وننزل البحر براحتنا في قرية اللؤلؤة التابعة للقوات المسلحة (أمان تام ونظافة) — وقت حر للغداء والاستراحة — التجمع بالليل للعودة وإحنا فاصلين شحن ومغيرين جو بجد!",
     extraImages: [
-      "/images/21.png", // صور السلايدر للسخنة
+      "/images/21.png", 
       "/images/22.png",
       "/images/23.png",
       "/images/24.png",
@@ -245,10 +233,10 @@ const FLASH_OFFERS = [
     subtitle: "الأهرامات أو القلعة — الحسين — مجمع الأديان", 
     price: "500 جـ", 
     color: "from-amber-500 to-orange-400", 
-    image: "/images/c1.jpg", // غيّر c1.jpg باسم صورة القاهرة اللي عندك
+    image: "/images/c1.jpg", 
     program: "يوم مميز في قلب العاصمة يشمل زيارة الأهرامات أو القلعة — جولة روحانية في الحسين والأزهر — وزيارة لشارع مجمع الأديان للتعرف على عبق التاريخ.",
     extraImages: [
-      "/images/27.jpg", // صور السلايدر للقاهرة
+      "/images/27.jpg",
       "/images/31.jpg",
       "/images/36.jpg",
       "/images/33.jpg",
@@ -263,12 +251,12 @@ const FLASH_OFFERS = [
 ]
 
 const WHY_US = [
-  { icon:Users,  title:"مشرف خاص",       desc:"مشرف متمرن مع كل فوج طوال الرحلة",           color:"text-sky-600",     bg:"bg-sky-100" },
+  { icon:Users,  title:"مشرف خاص",       desc:"مشرف متمرن مع كل فوج طوال الرحلة",            color:"text-sky-600",     bg:"bg-sky-100" },
   { icon:Bus,    title:"انتقالات مجانية", desc:"أتوبيسات مريحة من الزقازيق ذهاباً وعودةً",    color:"text-emerald-600", bg:"bg-emerald-100" },
-  { icon:Home,   title:"شقق مجهزة",       desc:"شقق مكيفة بالكامل مع جميع المرافق",           color:"text-orange-600",  bg:"bg-orange-100" },
-  { icon:Shield, title:"تأمين سفر",       desc:"تغطية شاملة لجميع أفراد الرحلة",              color:"text-ocean",       bg:"bg-blue-100" },
+  { icon:Home,   title:"شقق مجهزة",       desc:"شقق مكيفة بالكامل مع جميع المرافق",            color:"text-orange-600",  bg:"bg-orange-100" },
+  { icon:Shield, title:"تأمين سفر",       desc:"تغطية شاملة لجميع أفراد الرحلة",               color:"text-ocean",       bg:"bg-blue-100" },
   { icon:Waves,  title:"شواطئ خاصة",      desc:"أتوبيسات داخلية للشواطئ المميزة مجاناً",      color:"text-cyan-600",    bg:"bg-cyan-100" },
-  { icon:Star,   title:"جودة مضمونة",     desc:"أكثر من 500 عميل سعيد في موسم واحد",          color:"text-amber-600",   bg:"bg-amber-100" },
+  { icon:Star,   title:"جودة مضمونة",     desc:"أكثر من 500 عميل سعيد في موسم واحد",           color:"text-amber-600",   bg:"bg-amber-100" },
 ]
 
 const WHATSAPP = "201063278868"
@@ -358,7 +346,6 @@ function Hero({ loading, onBook }) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=75" alt="شاطئ صيفي بمياه فيروزية ورمال ذهبية" className="absolute inset-0 w-full h-full object-cover"/>
-      {/* طبقة فاتحة ومشرقة بدلاً من السوداء */}
       <div className="absolute inset-0 bg-gradient-to-b from-sky-200/40 via-sky-100/30 to-white"/>
       <div className="absolute inset-0 bg-gradient-to-tr from-white/50 to-transparent"/>
       <div className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full bg-sky2/20 blur-3xl animate-float"/>
@@ -411,7 +398,7 @@ function Hero({ loading, onBook }) {
   )
 }
 
-function FlashOffers() {
+function FlashOffers({ offers }) {
   const [selected, setSelected] = useState(null)
 
   return (
@@ -424,7 +411,7 @@ function FlashOffers() {
           <h2 className="text-3xl md:text-4xl font-black text-ocean">أقوى <span className="text-sunset">عروضنا دلوقتي</span></h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {FLASH_OFFERS.map(o => {
+          {offers.map(o => {
             const msg = `مرحباً Quick Air!\nأريد الاستفسار عن:\n${o.title}\n${o.subtitle}\nالسعر: ${o.price}`
             return (
               <div key={o.id} className="group rounded-2xl overflow-hidden bg-white border border-sky-100 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
@@ -437,8 +424,6 @@ function FlashOffers() {
                   <h3 className="text-lg font-black text-ocean mb-1">{o.title}</h3>
                   <p className="text-[13px] text-slate-600 mb-3">{o.subtitle}</p>
                   
-                  {/* تم إزالة قسم "باقي على الإغلاق" من هنا بالكامل */}
-
                   <div className="flex items-center justify-between pt-3 border-t border-sky-100">
                     <div>
                       <div className="text-[10px] text-slate-500">يبدأ من</div>
@@ -476,8 +461,10 @@ function FlashOffers() {
               </p>
 
               {/* يعرض الصور المتحركة لو متوفرة، أو صورة الغلاف */}
-              {selected.extraImages && selected.extraImages.length > 0 ? (
-                <ImageSlider images={selected.extraImages} />
+              {selected.extra_images && selected.extra_images.length > 0 ? (
+                <ImageSlider images={selected.extra_images} />
+              ) : selected.extraImages && selected.extraImages.length > 0 ? (
+                 <ImageSlider images={selected.extraImages} />
               ) : (
                 <img src={selected.image} alt={selected.title} className="w-full h-52 object-cover rounded-2xl border border-sky-100 mb-6 shadow-lg" />
               )}
@@ -512,7 +499,7 @@ function FlashOffers() {
   )
 }
 
-function DayTrips() {
+function DayTrips({ trips }) {
   const [selected, setSelected] = useState(null)
   return (
     <>
@@ -527,13 +514,12 @@ function DayTrips() {
             <p className="text-slate-600 mt-2 text-sm max-w-md mx-auto">انطلق من الزقازيق وعد — مريح وبأسعار تناسب الجميع</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {DAY_TRIPS.map((trip,i) => (
+            {trips.map((trip,i) => (
               <div key={trip.id} className="group relative rounded-2xl overflow-hidden bg-white border border-sky-100 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" style={{animationDelay:`${i*0.06}s`}}>
                 {trip.featured && (
                   <div className="absolute top-0 inset-x-0 z-20 bg-gradient-to-r from-sunset to-amber-500 py-1 text-center text-[11px] font-black text-white">الأكثر طلباً</div>
                 )}
                 
-                {/* تم إزالة طبقة اللون بالكامل من هنا لجميع البرامج */}
                 <div className={`relative h-36 overflow-hidden ${trip.featured?"mt-7":""}`}>
                   <img src={trip.image} alt={trip.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
                 </div>
@@ -565,8 +551,9 @@ function DayTrips() {
                   {selected.price} جنيه <span className="text-sm font-normal text-slate-500">/ للفرد</span>
                 </p>
 
-                {/* استدعاء الـ Slider هنا لجميع الصور */}
-                {selected.extraImages && selected.extraImages.length > 0 ? (
+                {selected.extra_images && selected.extra_images.length > 0 ? (
+                  <ImageSlider images={selected.extra_images} />
+                ) : selected.extraImages && selected.extraImages.length > 0 ? (
                   <ImageSlider images={selected.extraImages} />
                 ) : (
                   <img src={selected.image} alt={selected.name} className="w-full h-52 object-cover rounded-2xl border border-sky-100 mb-6 shadow-lg" />
@@ -701,7 +688,7 @@ function MatrouhPackages() {
   )
 }
 
-function DahabSection() {
+function DahabSection({ packages }) {
   return (
     <section id="dahab" className="py-16 px-4 bg-sky-soft">
       <div className="max-w-7xl mx-auto">
@@ -723,7 +710,7 @@ function DahabSection() {
               </tr>
             </thead>
             <tbody>
-              {DAHAB_PACKAGES.map((p, i) => (
+              {packages.map((p, i) => (
                 <tr key={i} className={`border-b border-sky-50 hover:bg-sky-50 transition-colors ${i%2===0?"bg-white":"bg-sky-50/40"}`}>
                   <td className="p-4 text-ocean font-bold">{p.name}</td>
                   <td className="p-4 text-slate-600">{p.loc}</td>
@@ -1147,9 +1134,33 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [modalOpen, setModalOpen]     = useState(false)
 
+  // ── تجهيز الـ States لسحب الداتا من Supabase، مع استخدام الثوابت كقيمة مبدئية ──
+  const [flashOffers, setFlashOffers] = useState(FLASH_OFFERS)
+  const [dayTrips, setDayTrips] = useState(DAY_TRIPS)
+  const [dahabPackages, setDahabPackages] = useState(DAHAB_PACKAGES)
+
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 1400)
-    return () => clearTimeout(t)
+    async function fetchSupabaseData() {
+      try {
+        const [offersRes, tripsRes, dahabRes] = await Promise.all([
+          supabase.from('flash_offers').select('*').order('id', { ascending: true }),
+          supabase.from('day_trips').select('*').order('id', { ascending: true }),
+          supabase.from('dahab_packages').select('*').order('id', { ascending: true })
+        ]);
+
+        // لو فيه داتا جاية من السيرفر، هيبدّل الداتا القديمة بيها
+        if (offersRes.data && offersRes.data.length > 0) setFlashOffers(offersRes.data);
+        if (tripsRes.data && tripsRes.data.length > 0) setDayTrips(tripsRes.data);
+        if (dahabRes.data && dahabRes.data.length > 0) setDahabPackages(dahabRes.data);
+
+      } catch (error) {
+        console.error("خطأ في الاتصال بقاعدة البيانات، جاري عرض الداتا الأساسية:", error);
+      } finally {
+        setTimeout(() => setLoading(false), 1400); // ديلاي بسيط عشان الشاشة الافتتاحية
+      }
+    }
+
+    fetchSupabaseData();
   }, [])
 
   return (
@@ -1163,10 +1174,10 @@ export default function App() {
       <Navbar onBook={() => setModalOpen(true)}/>
       <main>
         <Hero loading={loading} onBook={() => setModalOpen(true)}/>
-        <FlashOffers/>
-        <DayTrips/>
+        <FlashOffers offers={flashOffers}/>
+        <DayTrips trips={dayTrips}/>
         <MatrouhPackages/>
-        <DahabSection/>
+        <DahabSection packages={dahabPackages}/>
         <FlightsSection/>
         <WhyUs/>
       </main>
