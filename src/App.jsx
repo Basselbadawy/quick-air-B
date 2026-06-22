@@ -233,7 +233,7 @@ const FLASH_OFFERS = [
     subtitle: "الأهرامات أو القلعة — الحسين — مجمع الأديان", 
     price: "500 جـ", 
     color: "from-amber-500 to-orange-400", 
-    image: "/images/c1.jpg", 
+    image: "/images/27.jpg", 
     program: "يوم مميز في قلب العاصمة يشمل زيارة الأهرامات أو القلعة — جولة روحانية في الحسين والأزهر — وزيارة لشارع مجمع الأديان للتعرف على عبق التاريخ.",
     extraImages: [
       "/images/27.jpg",
