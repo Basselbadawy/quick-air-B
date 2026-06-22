@@ -248,9 +248,16 @@ const FLASH_OFFERS = [
     image: "/images/c1.jpg", // غيّر c1.jpg باسم صورة القاهرة اللي عندك
     program: "يوم مميز في قلب العاصمة يشمل زيارة الأهرامات أو القلعة — جولة روحانية في الحسين والأزهر — وزيارة لشارع مجمع الأديان للتعرف على عبق التاريخ.",
     extraImages: [
-      "/images/c1.jpg", // صور السلايدر للقاهرة
-      "/images/c2.jpg",
-      "/images/c3.jpg"
+      "/images/27.jpg", // صور السلايدر للقاهرة
+      "/images/31.jpg",
+      "/images/36.jpg",
+      "/images/33.jpg",
+      "/images/34.jpg",
+      "/images/35.jpg",
+      "/images/32.jpg",
+      "/images/28.jpg",
+      "/images/29.jpg",
+      "/images/30.jpg"
     ] 
   },
 ]
