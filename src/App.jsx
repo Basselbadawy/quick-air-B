@@ -206,17 +206,20 @@ const DAHAB_PACKAGES = [
 const FLASH_OFFERS = [
   { 
     id: 1, 
-    badge: "أرخص سعر", 
+    badge: "أقرب رحله يوم واحد",
     title: "العين السخنة (الإثنين 7/6)", 
     subtitle: "قرية اللؤلؤة (قوات مسلحة) — يوم كامل على البحر", 
     price: "400 جـ", 
     color: "from-blue-500 to-indigo-400", 
-    image: "/images/s1.jpg", // غيّر s1.jpg باسم صورة السخنة اللي عندك
+    image: "/images/23.jpg", // غيّر s1.jpg باسم صورة السخنة اللي عندك
     program: "هنتحرك الصبح بدري وننزل البحر براحتنا في قرية اللؤلؤة التابعة للقوات المسلحة (أمان تام ونظافة) — وقت حر للغداء والاستراحة — التجمع بالليل للعودة وإحنا فاصلين شحن ومغيرين جو بجد!",
     extraImages: [
-      "/images/27.png", // صور السلايدر للسخنة
-      "/images/s2.jpg",
-      "/images/s3.jpg"
+      "/images/21.jpg", // صور السلايدر للسخنة
+      "/images/22.jpg",
+      "/images/23.jpg",
+      "/images/24.jpg",
+      "/images/25.jpg",
+      "/images/26.jpg",
     ] 
   },
   { 
